@@ -4,3 +4,5 @@ logs/
 *.log
 .idea/
 run/
+/anxunsi-server/app/public/
+/anxunsi-server/config/config.prod.js

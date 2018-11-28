@@ -91,7 +91,6 @@ class SortThread extends Thread {
 <script>
     import '@/assets/css/bootstrap.css';
     import '@/assets/css/Bruce.css';
-
     export default {
         name: "anxunsi",
     }
