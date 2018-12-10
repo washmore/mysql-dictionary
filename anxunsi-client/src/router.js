@@ -5,29 +5,28 @@ import Home from './views/Home.vue'
 Vue.use(Router)
 
 export default new Router({
-    mode: 'history',
+    // mode: 'history',
     base: process.env.BASE_URL,
     routes: [
         {
             path: '/',
             name: 'home',
-            redirect: '/anxunsi',
+            redirect: '/dic/home',
+        },
+        {
+            path: '/dic/home',
+            name: 'DicHome',
+            component: () => import('./views/dic/Home.vue')
         },
         {
             path: '/anxunsi',
             name: 'anxunsi',
-            // route level code-splitting
-            // this generates a separate chunk (about.[hash].js) for this route
-            // which is lazy-loaded when the route is visited.
-            component: () => import(/* webpackChunkName: "about" */ './views/Anxunsi.vue')
+            component: () => import('./views/Anxunsi.vue')
         },
         {
             path: '/about',
             name: 'about',
-            // route level code-splitting
-            // this generates a separate chunk (about.[hash].js) for this route
-            // which is lazy-loaded when the route is visited.
-            component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+            component: () => import('./views/About.vue')
         }
     ]
 })

@@ -13,7 +13,8 @@ module.exports = appInfo => {
     config.sequelize = {
         // support: mysql, mariadb, postgres, mssql
         dialect: 'mysql',
-        database: 'anxunsi',
+        // database: 'anxunsi',
+        database: 'information_schema',
         host: 'localhost',
         port: '3306',
         username: 'root',
