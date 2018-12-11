@@ -7,7 +7,7 @@ git clone --depth 1 https://github.com/1102568869/mysql-dictionary.git
 ```
 cd mysql-dictionary
 ```
-##一键启动  
+## 一键启动  
 mac:
 ```
 sh ./ci/run.sh
@@ -24,5 +24,5 @@ username: 'xxx',
 password: 'xxx',
 ```
 
-##访问项目
+## 访问项目  
 愉快的在浏览器输入[http://127.0.0.1:7001](http://127.0.0.1:7001)访问项目吧
