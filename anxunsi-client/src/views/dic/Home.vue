@@ -1,20 +1,33 @@
 <template>
-    <div id="welcome">
+    <div class="welcome">
         <el-container>
             <el-header class="welcome-header">
                 <div class="welcome-content">
                     &nbsp;Mysql数据字典
                 </div>
+                <div>系统时间:111</div>
+                <el-button
+                        class="user-info"
+                        @click="resetDbs"
+                >重新选择数据库
+                </el-button>
             </el-header>
             <el-container>
                 <div>
                     <el-aside width="100%">
-                        <el-menu @open="chooceSchema">
-                            <el-submenu :index="schema.schemaName" v-for="schema in schematas">
-                                <template slot="title"><i class="el-icon-document"></i>{{schema.schemaName}}</template>
-                                <el-menu-item :index="schema.schemaName+table.tableName"
-                                              v-for="table in tables[schema.schemaName]">
-                                    <span :title="table.tableComment">{{table.tableName}}</span>
+                        <el-checkbox v-model="showComment">显示中文表名(comment)</el-checkbox>
+                        <el-menu
+                                @select="chooceTable"
+                                @open="chooceSchema"
+                                :unique-opened="true"
+                        >
+                            <el-submenu :index="schemaName" v-for="(tables,schemaName) in schematas">
+                                <template slot="title"><i class="el-icon-setting"></i>{{schemaName}}</template>
+                                <el-menu-item :index="table.tableName"
+                                              v-for="table in tables">
+                                    <span :title="showComment&&table.tableComment&&table.tableComment!==''? table.tableName:table.tableComment">
+                                        {{showComment&&table.tableComment&&table.tableComment!==''? table.tableComment:table.tableName}}
+                                    </span>
                                 </el-menu-item>
                             </el-submenu>
                         </el-menu>
@@ -28,7 +41,7 @@
                 <div>
                     开发人员 <a target="_blank" href="https://blog.washmoretech.com">洗澡狂魔(washmore)</a>
                     && <a target="_blank" href="https://gitee.com/lanlanstar">兰兰(lanlanstar)</a><br/>
-                    © 2018 - 叮当家的小账本 Powered by Vue.js && element-ui
+                    © 2018 - Mysql数据字典 Powered by egg.js && Vue.js && element-ui
                 </div>
             </el-footer>
         </el-container>
@@ -41,32 +54,51 @@
         data() {
             return {
                 schematas: [],
-                tables: {}
-
+                showComment: false,
             }
         },
         watch: {},
         created: function () {
-            axios.get(`/schemata/all`).then(result => {
+
+        },
+        mounted: function () {
+            let dbs = localStorage.getItem('mysql_dbs');
+            if (!dbs || dbs === '') {
+                this.$router.push('/dic/chooce');
+                return;
+            }
+            axios.get(`/tables/group?dbs=` + dbs).then(result => {
                 console.info('result', result);
                 this.schematas = result;
             })
         },
-        mounted: function () {
-
-        },
         methods: {
-            chooceSchema: function (schemaName) {
-                if (this.tables[schemaName] && this.tables[schemaName].length > 0) {
-                    return;
-                }
-                var vm = this;
-                axios.get("/" + schemaName + "/tables").then(result => {
-                    console.info('result', result);
-                    vm.$set(vm.tables, schemaName, result);
+            resetDbs: function () {
+                this.$confirm('确认当前操作?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    localStorage.removeItem('mysql_dbs');
+                    this.$router.replace('/dic/chooce');
+                }).catch(() => {
 
+                });
+
+            },
+            chooceSchema: function (index) {
+                console.info('index', index);
+            },
+            chooceTable: function (index, indexPath) {
+                console.info('index', index, 'indexPath', indexPath)
+                this.$router.push({
+                    path: '/dic/table',
+                    query: {
+                        schema: indexPath[0],
+                        name: index + '',
+                    },
                 })
-            }
+            },
         },
     }
 
@@ -87,7 +119,7 @@
         justify-content: space-between;
         -webkit-align-items: center;
         align-items: center;
-        background-color: #409EFF;
+        background-color: #20e9ff;
         .welcome-content {
             font-size: 32px;
             .user-name {
@@ -110,7 +142,7 @@
 
     .footer {
         text-align: right;
-        background: #409EFF;
+        background: #20e9ff;
         border-top: 1px solid #000;
         padding: 10px 0 10px 0;
         width: 100%;

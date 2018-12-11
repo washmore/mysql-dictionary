@@ -12,6 +12,14 @@ class TablesService extends Service {
         }
         return tables;
     }
+
+    async groupBySchemaName(dbs) {
+        const tables = await this.ctx.model.Tables.groupBySchemaName(dbs);
+        if (!tables) {
+            this.ctx.throw(404, 'article not found');
+        }
+        return tables;
+    }
 }
 
 module.exports = TablesService;

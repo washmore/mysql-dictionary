@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
 
 Vue.use(Router)
 
@@ -14,9 +13,21 @@ export default new Router({
             redirect: '/dic/home',
         },
         {
+            path: '/dic/chooce',
+            name: 'chooce',
+            component: () => import('./views/dic/Chooce.vue'),
+        },
+        {
             path: '/dic/home',
             name: 'DicHome',
-            component: () => import('./views/dic/Home.vue')
+            component: () => import('./views/dic/Home.vue'),
+            children: [
+                {
+                    path: '/dic/table',
+                    name: 'DicTable',
+                    component: () => import('./views/dic/Table.vue')
+                },
+            ]
         },
         {
             path: '/anxunsi',

@@ -1,5 +1,8 @@
+const groupBy = require('../common/streams.js').GroupBy;
+const sys_dbs = require('../common/consts.js').sys_dbs;
+
 module.exports = app => {
-    const {STRING, DATE} = app.Sequelize;
+    const {STRING, DATE, Op} = app.Sequelize;
 
     const Tables = app.model.define('tables', {
         tableName: {
@@ -11,6 +14,10 @@ module.exports = app => {
         tableComment: {
             type: STRING(200),
             field: 'table_comment'
+        },
+        tableSchema: {
+            type: STRING(200),
+            field: 'table_schema'
         },
         createTime: {
             type: DATE,
@@ -29,6 +36,29 @@ module.exports = app => {
             }
         })
     };
-
+    Tables.groupBySchemaName = async function (dbs) {
+        let list;
+        if (dbs && dbs !== '') {
+            list = await this.findAll({
+                where: {
+                    table_schema: {
+                        [Op.in]: dbs.split(','),
+                        [Op.notIn]: sys_dbs,
+                    }
+                }
+            })
+        } else {
+            list = await this.findAll({
+                where: {
+                    table_schema: {
+                        [Op.notIn]: sys_dbs,
+                    }
+                }
+            })
+        }
+        return groupBy(list, (item) => {
+            return item.tableSchema.toUpperCase();
+        });
+    };
     return Tables;
 };

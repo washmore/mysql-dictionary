@@ -1,6 +1,7 @@
-module.exports = app => {
-    const {STRING} = app.Sequelize;
+const sys_dbs = require('../common/consts.js').sys_dbs;
 
+module.exports = app => {
+    const {STRING, Op} = app.Sequelize;
     const Schemata = app.model.define('schemata', {
         catalogName: {
             type: STRING(200),
@@ -39,6 +40,11 @@ module.exports = app => {
     };
     Schemata.findAllSchematas = async function () {
         return await this.findAll({
+            where: {
+                schema_name: {
+                    [Op.notIn]: sys_dbs,
+                }
+            },
             order: [['schema_name', 'asc']]
         });
     };
