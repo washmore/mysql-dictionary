@@ -5,7 +5,7 @@
                 <div class="welcome-content">
                     &nbsp;Mysql数据字典
                 </div>
-                <div>系统时间:111</div>
+                <div style="width: 50%;">开发人员check各个数据库以及表的comment信息/主键/自增/索引是否完备.查漏补缺</div>
                 <el-button
                         class="user-info"
                         @click="resetDbs"

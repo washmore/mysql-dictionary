@@ -34,10 +34,5 @@ export default new Router({
             name: 'anxunsi',
             component: () => import('./views/Anxunsi.vue')
         },
-        {
-            path: '/about',
-            name: 'about',
-            component: () => import('./views/About.vue')
-        }
     ]
 })
