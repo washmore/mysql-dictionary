@@ -12,10 +12,9 @@ mac:
 ```
 sh ./ci/run.sh
 ```
+
 win:
-```
-./ci/run.bat
-```
+~~谁会写求告诉我,我他喵的不会...~~
 
 **tips:如果启动报错,请修改`anxunsi-server/config/config.default.js`文件中的数据库连接相关配置**
 ```
