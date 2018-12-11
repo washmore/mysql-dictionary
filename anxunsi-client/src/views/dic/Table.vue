@@ -1,40 +1,49 @@
 <template>
     <div class="table">
-        <el-table
-                :data="columns"
-                stripe
-                style="width: 100%">
-            <el-table-column
-                    prop="columnName"
-                    label="字段名"
-                    width="180">
-            </el-table-column>
-            <el-table-column
-                    align="center"
-                    prop="extra"
-                    label="自增"
-                    width="60">
-                <template slot-scope="scope">
-                    <el-checkbox
-                            v-model="scope.row[scope.column['property']].indexOf('auto_increment') !== -1"
-                            disabled="">
-                    </el-checkbox>
-                </template>
-            </el-table-column>
-            <el-table-column
-                    prop="tableSchema"
-                    label="数据库名">
-            </el-table-column>
-        </el-table>
+        <el-card class="box-card">
+            表名:{{table.tableName}},<br/>
+            注释:{{table.tableComment}},<br/>
+            创建时间:{{table.createAt}},<br/>
+        </el-card>
+        <el-card class="box-card">
+            <el-table
+                    :data="columns"
+                    stripe
+                    style="width: 100%">
+                <el-table-column
+                        prop="columnName"
+                        label="字段名"
+                        width="180">
+                </el-table-column>
+                <el-table-column
+                        align="center"
+                        prop="extra"
+                        label="自增"
+                        width="60">
+                    <template slot-scope="scope">
+                        <el-checkbox
+                                v-model="scope.row[scope.column['property']].indexOf('auto_increment') !== -1"
+                                disabled="">
+                        </el-checkbox>
+                    </template>
+                </el-table-column>
+                <el-table-column
+                        prop="tableSchema"
+                        label="数据库名">
+                </el-table-column>
+            </el-table>
+        </el-card>
     </div>
 </template>
 
 <script>
+    import moment from 'moment';
 
     export default {
         data() {
             return {
-                columns: []
+                columns: [],
+                table: {}
             }
         },
         watch: {
@@ -58,6 +67,13 @@
                 axios.get('/columns?table=' + table + '&schema=' + schema).then(result => {
                     console.info('result', result);
                     vm.columns = result;
+                })
+                axios.get('/table?table=' + table + '&schema=' + schema).then(result => {
+                    console.info('result', result);
+                    vm.table = {
+                        ...result,
+                        createAt: moment(result.createTime).format("YYYY-MM-DD HH:mm:ss")
+                    };
                 })
             },
             columnFormatter: function (row, column) {

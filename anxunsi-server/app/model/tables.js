@@ -36,6 +36,15 @@ module.exports = app => {
             }
         })
     };
+    Tables.findBySchemaAndTable = async function (schema, table) {
+        return await this.findOne({
+            where: {
+                table_schema: schema,
+                table_name: table,
+            }
+        })
+    };
+
     Tables.groupBySchemaName = async function (dbs) {
         let list;
         if (dbs && dbs !== '') {
