@@ -1,6 +1,6 @@
 # 俺寻思?
 
-base:**Node version = 9.3.0 , NPM = 6.4.1 , Mysql = 5.7.0 , Chrome**,  
+base version:**Node = 9.3.0 , NPM = 6.4.1 , Mysql = 5.7.0 , Chrome = 70**,  
 不保证其他设备的兼容性
 
 ## 克隆项目到本地
@@ -29,13 +29,13 @@ cnpm i && cnpm run dev
 ```
 
 **tips:warning信息请忽略.如果启动报错,请修改`anxunsi-server/config/config.default.js`文件中的数据库连接相关配置,然后再从`anxunsi-server`目录重新尝试执行`cnpm run dev`命令**  
-**注意:不要改database的值!不要改database的值!不要改database的值!**
 ```
 host: 'xxx',
 port: 'xxx',
 username: 'xxx',
 password: 'xxx',
 ```
+**注意:不要改database的值!不要改database的值!不要改database的值!**
 
 ## 访问项目  
 愉快的在浏览器输入[http://127.0.0.1:7001](http://127.0.0.1:7001)访问项目吧

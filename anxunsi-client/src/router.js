@@ -10,7 +10,7 @@ export default new Router({
         {
             path: '/',
             name: 'home',
-            redirect: '/dic/home',
+            redirect: '/dic',
         },
         {
             path: '/dic/chooce',
@@ -18,15 +18,21 @@ export default new Router({
             component: () => import('./views/dic/Chooce.vue'),
         },
         {
-            path: '/dic/home',
+            path: '/dic',
             name: 'DicHome',
             component: () => import('./views/dic/Home.vue'),
             children: [
                 {
-                    path: '/dic/table',
+                    path: '',
+                    name: 'DicAbout',
+                    component: () => import('./views/dic/About.vue')
+                },
+                {
+                    path: 'table',
                     name: 'DicTable',
                     component: () => import('./views/dic/Table.vue')
                 },
+
             ]
         },
         {
