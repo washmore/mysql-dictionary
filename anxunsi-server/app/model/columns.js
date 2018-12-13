@@ -17,9 +17,29 @@ module.exports = app => {
             type: STRING(200),
             field: 'table_schema'
         },
+        isNullable: {
+            type: STRING(200),
+            field: 'is_nullable'
+        },
+        columnKey: {
+            type: STRING(200),
+            field: 'column_key'
+        },
+        columnType: {
+            type: STRING(200),
+            field: 'column_type'
+        },
+        columnDefault:{
+            type: STRING(200),
+            field: 'column_default'
+        },
         extra: {
             type: STRING(200),
             field: 'extra'
+        },
+        columnComment: {
+            type: STRING(200),
+            field: 'column_comment'
         },
     }, {
         timestamps: false,

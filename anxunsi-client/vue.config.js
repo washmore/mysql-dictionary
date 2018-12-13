@@ -15,8 +15,8 @@ module.exports = {
                 secure: false,
                 changeOrigin: true,
                 // bypass: function (req, res, proxyOptions) {
-                //     console.info("req:", req.originalUrl);
-                //     if (req.originalUrl.indexOf("/sockjs-node") != -1) {
+                //     if (req.originalUrl.indexOf("/public") !== -1) {
+                //         console.info("req:", req.originalUrl);
                 //         return false;
                 //     }
                 // },
@@ -26,5 +26,14 @@ module.exports = {
                 }
             }
         }
+    },
+    chainWebpack: config => {
+        // // GraphQL Loader
+        // config.module
+        //     .rule('url')
+        //     .test(/\.(mp3|wav)$/)
+        //     .use('url-loader')
+        //     .loader('url-loader')
+        //     .end()
     },
 }

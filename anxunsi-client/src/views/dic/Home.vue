@@ -15,15 +15,18 @@
             <el-container>
                 <div>
                     <el-aside width="100%">
-                        <el-checkbox v-model="showComment">显示中文表名(comment)</el-checkbox>
+                        <div style="width: 100%;text-align: center">
+                            <el-checkbox v-model="showComment">显示中文表名(表注释)</el-checkbox>
+                        </div>
                         <el-menu
                                 @select="chooceTable"
                                 @open="chooceSchema"
                                 :unique-opened="true"
+                                :default-active="defaultActive"
                         >
                             <el-submenu :index="schemaName" v-for="(tables,schemaName) in schematas">
                                 <template slot="title"><i class="el-icon-setting"></i>{{schemaName}}</template>
-                                <el-menu-item :index="table.tableName"
+                                <el-menu-item :index="table.tableName+','+schemaName"
                                               v-for="table in tables">
                                     <span :title="showComment&&table.tableComment&&table.tableComment!==''? table.tableName:table.tableComment">
                                         {{showComment&&table.tableComment&&table.tableComment!==''? table.tableComment:table.tableName}}
@@ -55,6 +58,7 @@
             return {
                 schematas: [],
                 showComment: false,
+                defaultActive: ''
             }
         },
         watch: {},
@@ -62,13 +66,13 @@
 
         },
         mounted: function () {
+            this.defaultActive = this.$route.query.name + ',' + this.$route.query.schema;
             let dbs = localStorage.getItem('mysql_dbs');
             if (!dbs || dbs === '') {
                 this.$router.push('/dic/chooce');
                 return;
             }
             axios.get(`/tables/group?dbs=` + dbs).then(result => {
-                console.info('result', result);
                 this.schematas = result;
             })
         },
@@ -87,15 +91,13 @@
 
             },
             chooceSchema: function (index) {
-                console.info('index', index);
             },
             chooceTable: function (index, indexPath) {
-                console.info('index', index, 'indexPath', indexPath)
                 this.$router.push({
                     path: '/dic/table',
                     query: {
                         schema: indexPath[0],
-                        name: index + '',
+                        name: index.split(',')[0],
                     },
                 })
             },
@@ -132,11 +134,6 @@
             -moz-border-radius: 20px;
             border-radius: 20px;
 
-        }
-        .image {
-            max-width: 100%;
-            width: 100%;
-            display: block;
         }
     }
 

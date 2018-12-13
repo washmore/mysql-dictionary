@@ -33,13 +33,11 @@
         },
         mounted: function () {
             axios.get(`/schemata/all`).then(result => {
-                console.info('result', result);
                 this.schematas = result;
             })
         },
         methods: {
             setMysqlDbs: function () {
-                console.info('mysql_dbs', this.mysql_dbs);
                 if (this.mysql_dbs.length === 0) {
                     this.$message.error('请至少选择一个数据库!');
                     return;
