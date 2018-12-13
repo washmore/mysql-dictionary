@@ -14,6 +14,7 @@ module.exports = appInfo => {
         // support: mysql, mariadb, postgres, mssql
         dialect: 'mysql',
         database: 'information_schema',
+        //上面的database项不要修改!!!只需要修改下面四项(如果有必要的话)
         host: 'localhost',
         port: '3306',
         username: 'root',

@@ -8,7 +8,7 @@ class ColumnsService extends Service {
     async findBySchemaAndTable(schemaName, tableName) {
         const columns = await this.ctx.model.Columns.findBySchemaAndTable(schemaName, tableName);
         if (!columns) {
-            this.ctx.throw(404, 'article not found');
+            this.ctx.throw(404, 'Columns not found');
         }
         return columns;
     }

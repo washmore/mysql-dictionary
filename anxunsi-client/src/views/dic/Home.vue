@@ -48,7 +48,11 @@
                 </div>
             </el-footer>
         </el-container>
+        <div class="beta-bar">
+            <a target="_blank" href="https://github.com/1102568869/mysql-dictionary">Fork Github</a>
+        </div>
     </div>
+
 </template>
 
 <script>
@@ -133,7 +137,7 @@
             -webkit-border-radius: 20px;
             -moz-border-radius: 20px;
             border-radius: 20px;
-
+            margin-right: 80px;
         }
     }
 
@@ -150,5 +154,23 @@
 
     .color-F00 {
         color: #F00
+    }
+
+    .beta-bar {
+        display: block;
+        position: fixed;
+        top: 0;
+        right: 0;
+        padding: 8px 0;
+        z-index: 999;
+        width: 200px;
+        background-color: #fff;
+        color: #20e9ff;
+        text-align: center;
+        transform: translate3d(60px, 24px, 0) rotate(45deg);
+        a{
+            color: #20e9ff;
+            text-decoration: none;
+        }
     }
 </style>

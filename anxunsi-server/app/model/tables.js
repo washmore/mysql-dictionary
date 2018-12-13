@@ -66,7 +66,7 @@ module.exports = app => {
             })
         }
         return groupBy(list, (item) => {
-            return item.tableSchema.toUpperCase();
+            return item.tableSchema;
         });
     };
     return Tables;
