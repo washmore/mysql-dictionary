@@ -8,13 +8,22 @@ git clone --depth 1 https://github.com/1102568869/mysql-dictionary.git
 cd mysql-dictionary
 ```
 ## 一键启动  
-mac:
+### mac:
 ```
 sh ./ci/run.sh
 ```
 
-win:
+### win:
 ~~谁会写求告诉我,我他喵的不会...~~
+
+分步走呗,依次执行以下每行命令
+```
+npm install -g cnpm --registry=https://registry.npm.taobao.org
+cd anxunsi-client
+cnpm i && cnpm run build
+cd ../anxunsi-server
+cnpm i && cnpm run dev
+```
 
 **tips:如果启动报错,请修改`anxunsi-server/config/config.default.js`文件中的数据库连接相关配置**
 ```
