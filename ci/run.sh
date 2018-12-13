@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-
+npm install -g cnpm --registry=https://registry.npm.taobao.org
 cd anxunsi-client
-npm i && npm run build
+cnpm i && cnpm run build
 cd ../anxunsi-server
-npm i && npm run dev
+cnpm i && cnpm run dev
