@@ -34,14 +34,8 @@ sh ./ci/run.sh
 
 ### win:
 ~~谁会写求告诉我,我他喵的不会...~~
-
-分步走呗,依次执行以下每行命令
 ```
-npm install -g cnpm --registry=https://registry.npm.taobao.org
-cd anxunsi-client
-cnpm i && cnpm run build
-cd ../anxunsi-server
-cnpm i && cnpm run dev
+ci\run
 ```
 
 **tips:warning信息请忽略.如果启动报错,请修改`anxunsi-server/config/config.default.js`文件中的数据库连接相关配置,然后再从`anxunsi-server`目录重新尝试执行`cnpm run dev`命令**  
@@ -54,7 +48,7 @@ password: 'xxx',
 **注意:不要改database的值!不要改database的值!不要改database的值!**
 
 ## 访问项目  
-愉快的在浏览器输入[ht
+愉快的在浏览器输入[http://127.0.0.1:7001](http://127.0.0.1:7001)访问项目吧
 
 # 参与贡献
 1. Fork 本项目  
