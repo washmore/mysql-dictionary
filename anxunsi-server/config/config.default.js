@@ -8,7 +8,13 @@ module.exports = appInfo => {
         // mapping: {
         //     '.html': 'nunjucks',
         // },
-        root: path.join(appInfo.baseDir, '/app/'),
+        root: path.join(appInfo.baseDir, '/app/public/'),
+    };
+    exports.static = {
+        prefix: '/',
+        dir: path.join(appInfo.baseDir, 'app/public'),
+        dynamic: true,
+        preload: false,
     };
     config.sequelize = {
         // support: mysql, mariadb, postgres, mssql

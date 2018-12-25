@@ -1,7 +1,7 @@
 module.exports = {
     outputDir: '../anxunsi-server/app/public',
     baseUrl: '',
-    assetsDir: '../public',
+    assetsDir: 'static',
     runtimeCompiler: undefined,
     productionSourceMap: undefined,
     parallel: undefined,
